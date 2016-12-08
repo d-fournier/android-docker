@@ -1,4 +1,4 @@
-FROM openjdk:8-jdk-alpine 
+FROM openjdk:8-jdk 
 
 MAINTAINER Donovan Fournier "donof43@gmail.com"
 
