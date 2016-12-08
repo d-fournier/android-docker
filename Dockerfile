@@ -23,7 +23,7 @@ RUN cd /opt && \
   echo -e "8933bad161af4178b1185d1a37fbf41ea5269c55\n" > android-sdk-linux\licenses\android-sdk-license && \
   echo -e "84831b9409646a918e30573bab4c9c91346d8abd\n" > android-sdk-linux\licenses\android-sdk-preview-license
 RUN cd /opt && \
-  /opt/tools/android_accept_licenses.sh "android-sdk-linux/tools/android update sdk --all --no-ui --filter platform-tools,tools,build-tools-${ANDROID_BUILD_TOOLS_VERSION},${ANDROID_API_LEVELS},extra-android-m2repository,extra-google-m2repository,extra-google-google_play_services"
+  /opt/tools/android-accept-licenses.sh "android-sdk-linux/tools/android update sdk --all --no-ui --filter platform-tools,tools,build-tools-${ANDROID_BUILD_TOOLS_VERSION},${ANDROID_API_LEVELS},extra-android-m2repository,extra-google-m2repository,extra-google-google_play_services"
 
 # Setup environment
 ENV ANDROID_HOME /opt/android-sdk-linux
