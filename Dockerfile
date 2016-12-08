@@ -8,9 +8,8 @@ ENV ANDROID_API_LEVELS android-25
 ENV ANDROID_BUILD_TOOLS_VERSION 25.0.1
 
 # Prepare environment
-RUN mkdir /opt
 COPY tools /opt/tools
-RUN apk update && apk add ca-certificates wget unzip expect && update-ca-certificates
+RUN apt-get update && apt-get install -y --force-yes expect && apt-get clean && rm -fr /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Download SDK and unzip SDK
 RUN cd /opt && \
@@ -23,8 +22,7 @@ RUN cd /opt && \
   echo -e "84831b9409646a918e30573bab4c9c91346d8abd\n" > android-sdk-linux\licenses\android-sdk-preview-license
 
 # Download SDK dependencies
-RUN cd /opt && \
-  /opt/tools/android-accept-licenses.sh "android-sdk-linux/tools/android update sdk --all --no-ui --filter platform-tools,build-tools-${ANDROID_BUILD_TOOLS_VERSION},${ANDROID_API_LEVELS},extra-android-m2repository,extra-google-m2repository,extra-google-google_play_services"
+RUN /opt/tools/android-accept-licenses.sh "/opt/android-sdk-linux/tools/android update sdk --all --no-ui --filter platform-tools,build-tools-${ANDROID_BUILD_TOOLS_VERSION},${ANDROID_API_LEVELS},extra-android-m2repository,extra-google-m2repository,extra-google-google_play_services"
 
 # Setup environment
 ENV ANDROID_HOME /opt/android-sdk-linux
