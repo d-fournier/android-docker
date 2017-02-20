@@ -5,7 +5,7 @@ MAINTAINER Donovan Fournier "donof43@gmail.com"
 ENV ANDROID_SDK_FILENAME tools_r25.2.3-linux.zip
 ENV ANDROID_SDK_URL https://dl.google.com/android/repository/${ANDROID_SDK_FILENAME}
 ENV ANDROID_API_LEVELS android-25
-ENV ANDROID_BUILD_TOOLS_VERSION 25.0.1
+ENV ANDROID_BUILD_TOOLS_VERSION 25.0.3
 
 # Prepare environment
 COPY tools /opt/tools
