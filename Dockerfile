@@ -20,7 +20,7 @@ RUN cd /opt && \
   chown -R root.root android-sdk-linux
   
 # Accept licence  
-RUN mkdir android-sdk-linux\licenses && \
+RUN mkdir /opt/android-sdk-linux/licenses && \
   echo -e "8933bad161af4178b1185d1a37fbf41ea5269c55\n" > /opt/android-sdk-linux/licenses/android-sdk-license && \
   echo -e "84831b9409646a918e30573bab4c9c91346d8abd\n" > /opt/android-sdk-linux/licenses\android-sdk-preview-license && \
   cat /opt/android-sdk-linux/licenses/android-sdk-license &&\
