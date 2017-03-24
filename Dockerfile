@@ -25,11 +25,7 @@ RUN mkdir /opt/android-sdk-linux/licenses && \
   echo "84831b9409646a918e30573bab4c9c91346d8abd" > /opt/android-sdk-linux/licenses/android-sdk-preview-license
 
 # Download SDK dependencies
-RUN /opt/tools/android-accept-licenses.sh "/opt/android-sdk-linux/tools/android update sdk --all --no-ui --filter platform-tools,build-tools-${ANDROID_BUILD_TOOLS_VERSION},${ANDROID_API_LEVELS},extra-android-m2repository,extra-google-m2repository,extra-google-google_play_services,extras-android-support,sys-img-x86-google_apis-${ANDROID_COMPILE_SDK}"
-
-# Managed Constraint Layout https://code.google.com/p/android/issues/detail?id=212128
-RUN echo y | sdkmanager "extras;m2repository;com;android;support;constraint;constraint-layout;1.0.2"
-RUN echo y | sdkmanager "extras;m2repository;com;android;support;constraint;constraint-layout-solver;1.0.2"
+RUN /opt/tools/android-accept-licenses.sh "/opt/android-sdk-linux/tools/android update sdk --all --no-ui --filter tools,platform-tools,build-tools-${ANDROID_BUILD_TOOLS_VERSION},${ANDROID_API_LEVELS},extra-android-m2repository,extra-google-m2repository,extra-google-google_play_services,extras-android-support,sys-img-x86-google_apis-${ANDROID_COMPILE_SDK}"
 
 # Setup environment
 ENV ANDROID_HOME /opt/android-sdk-linux
