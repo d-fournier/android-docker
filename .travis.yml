@@ -9,8 +9,7 @@ install:
   - git clone https://github.com/docker-library/official-images.git ~/official-images
 
 before_script:
-  - env | sort
-  - image="donovanfournier/android:sdk-${ANDROID_COMPILE_SDK}_build-tools-${ANDROID_BUILD_TOOLS_VERSION}"
+  - image="donovanfournier/android:sdk-${ANDROID_SDK}_build-tools-${ANDROID_BUILD_TOOLS}"
 
 script:
   - travis_retry docker build -t "$image" --build-arg ANDROID_COMPILE_SDK=$ANDROID_SDK --build-arg ANDROID_BUILD_TOOLS_VERSION=$ANDROID_BUILD_TOOLS .
