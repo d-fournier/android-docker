@@ -1,4 +1,4 @@
-FROM openjdk:8-jdk
+FROM openjdk:8-jdk-alpine
 
 MAINTAINER Fournier Donovan "support@dfournier.me"
 
@@ -7,6 +7,9 @@ ARG ANDROID_BUILD_TOOLS_VERSION=25.0.2
 
 ENV ANDROID_SDK_FILENAME tools_r25.2.3-linux.zip
 ENV ANDROID_SDK_URL https://dl.google.com/android/repository/${ANDROID_SDK_FILENAME}
+
+# Add openssl to get the Android SDK from a https source
+RUN apk add --update openssl  --no-cache bash
 
 # Prepare Android SDK directory
 RUN mkdir -p /opt/android-sdk-linux/licenses
@@ -21,13 +24,14 @@ RUN \
 
 # Download SDK and unzip SDK
 RUN cd /opt && \
-  wget -O android-sdk.zip --quiet ${ANDROID_SDK_URL} && \
+  wget -O android-sdk.zip "${ANDROID_SDK_URL}" && \
   unzip -q android-sdk.zip -d android-sdk-linux && \
   rm -f android-sdk.zip && \
   chown -R root.root android-sdk-linux && \
 
 # Update tools to get license option
-  /opt/android-sdk-linux/tools/bin/sdkmanager tools && \
+ /opt/android-sdk-linux/tools/bin/sdkmanager tools && \
+
 # Accept licence
   yes | /opt/android-sdk-linux/tools/bin/sdkmanager --licenses && \
 
