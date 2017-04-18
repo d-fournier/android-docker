@@ -5,7 +5,7 @@ MAINTAINER Fournier Donovan "support@dfournier.me"
 ARG ANDROID_COMPILE_SDK=24
 ARG ANDROID_BUILD_TOOLS_VERSION=25.0.2
 
-ENV ANDROID_SDK_FILENAME tools_r25.2.3-linux.zip
+ENV ANDROID_SDK_FILENAME tools_r25.2.5-linux.zip
 ENV ANDROID_SDK_URL https://dl.google.com/android/repository/${ANDROID_SDK_FILENAME}
 
 # Prepare Android SDK directory

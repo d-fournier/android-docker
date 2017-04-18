@@ -2,7 +2,9 @@ language: bash
 services: docker
 
 env:
-  - ANDROID_SDK=24 ANDROID_BUILD_TOOLS=25.0.2 VARIANT=alpine
+  - ANDROID_SDK=24 ANDROID_BUILD_TOOLS=25.0.2 VARIANT=alpine LATEST=true
+  - ANDROID_SDK=24 ANDROID_BUILD_TOOLS=25.0.2
+  - ANDROID_SDK=25 ANDROID_BUILD_TOOLS=25.0.2 VARIANT=alpine
   - ANDROID_SDK=25 ANDROID_BUILD_TOOLS=25.0.2
 
 install:
@@ -21,3 +23,4 @@ after_script:
   - docker history "$image"
   - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
   - docker push "$image";
+  - test $LATEST = "true" && docker tag "$image" donovanfournier/android:latest && docker push "$image";
