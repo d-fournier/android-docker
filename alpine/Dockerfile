@@ -2,10 +2,13 @@ FROM openjdk:8-jdk-alpine
 
 MAINTAINER Fournier Donovan "support@dfournier.me"
 
+# Get from Docker argument and set it as environment variable to make it available for other images
 ARG ANDROID_COMPILE_SDK=24
+ENV ANDROID_COMPILE_SDK=$ANDROID_COMPILE_SDK
 ARG ANDROID_BUILD_TOOLS_VERSION=25.0.2
+ENV ANDROID_BUILD_TOOLS_VERSION=$ANDROID_BUILD_TOOLS_VERSION
 
-ENV ANDROID_SDK_FILENAME tools_r25.2.5-linux.zip
+ENV ANDROID_SDK_FILENAME sdk-tools-linux-3859397.zip
 ENV ANDROID_SDK_URL https://dl.google.com/android/repository/${ANDROID_SDK_FILENAME}
 
 # Add openssl to get the Android SDK from a https source
@@ -13,12 +16,6 @@ RUN apk add --update openssl  --no-cache bash
 
 # Prepare Android SDK directory
 RUN mkdir -p /opt/android-sdk-linux/licenses
-
-# Accept license to update the android SDK easily
-RUN \
-  echo "8933bad161af4178b1185d1a37fbf41ea5269c55" > /opt/android-sdk-linux/licenses/android-sdk-license && \
-  echo "84831b9409646a918e30573bab4c9c91346d8abd" > /opt/android-sdk-linux/licenses/android-sdk-preview-license
-
 
 # ----- START Run all the Android preparation in a single RUN command to reduce image size
 
@@ -28,9 +25,6 @@ RUN cd /opt && \
   unzip -q android-sdk.zip -d android-sdk-linux && \
   rm -f android-sdk.zip && \
   chown -R root.root android-sdk-linux && \
-
-# Update tools to get license option
- /opt/android-sdk-linux/tools/bin/sdkmanager tools && \
 
 # Accept licence
   yes | /opt/android-sdk-linux/tools/bin/sdkmanager --licenses && \
