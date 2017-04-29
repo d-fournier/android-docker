@@ -50,17 +50,25 @@ WORKDIR /home/android/workspace
 
 # TODO find a way to avoid this duplication with root Dockerfile
 
+
 # ----- START Download Emulator Android dependency
+
+# Install system dependencies
+RUN apt-get update \
+    && apt-get install  -y --no-install-recommends file libmagic1 libglu1-mesa mesa-utils libpci3 pciutils libpulse0 \
+    && apt-get clean
+    && rm -rf /var/lib/apt/lists/*
 
 # Download SDK dependencies
 RUN  /opt/android-sdk-linux/tools/bin/sdkmanager \
-    "system-images;android-${ANDROID_COMPILE_SDK};google_apis;x86_64"
+    "emulator" \
+    "system-images;android-${ANDROID_COMPILE_SDK};google_apis;armeabi-v7a"
 
 RUN echo "no" | /opt/android-sdk-linux/tools/bin/avdmanager \
     --verbose create avd \
     --name "Android-test-emulator" \
-    --package "system-images;android-${ANDROID_COMPILE_SDK};google_apis;x86_64" \
+    --package "system-images;android-${ANDROID_COMPILE_SDK};google_apis;armeabi-v7a" \
     --tag  "google_apis" \
-    --abi "x86_64"
+    --abi "armeabi-v7a"
 
 # ----- END
