@@ -56,7 +56,7 @@ WORKDIR /home/android/workspace
 # Install system dependencies
 RUN apt-get update \
     && apt-get install  -y --no-install-recommends file libmagic1 libglu1-mesa mesa-utils libpci3 pciutils libpulse0 \
-    && apt-get clean
+    && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
 # Download SDK dependencies
