@@ -24,18 +24,19 @@ RUN cd /opt && \
   chown -R root.root android-sdk-linux && \
 
 # Accept licence
-  /opt/android-sdk-linux/tools/bin/sdkmanager --list && \
   yes | /opt/android-sdk-linux/tools/bin/sdkmanager --licenses && \
 
 # Download SDK dependencies
-  /opt/android-sdk-linux/tools/bin/sdkmanager \
+  yes | /opt/android-sdk-linux/tools/bin/sdkmanager \
     tools \
     platform-tools \
     "build-tools;${ANDROID_BUILD_TOOLS_VERSION}" \
     "platforms;android-${ANDROID_COMPILE_SDK}" \
     "extras;android;m2repository" \
     "extras;google;m2repository" \
-    "extras;google;google_play_services"
+    "extras;google;google_play_services"  && \
+
+  yes | /opt/android-sdk-linux/tools/bin/sdkmanager --licenses
 
 # ----- END
 
