@@ -24,6 +24,7 @@ RUN cd /opt && \
   chown -R root.root android-sdk-linux && \
 
 # Accept licence
+  /opt/android-sdk-linux/tools/bin/sdkmanager --list && \
   yes | /opt/android-sdk-linux/tools/bin/sdkmanager --licenses && \
 
 # Download SDK dependencies
