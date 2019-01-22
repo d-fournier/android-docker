@@ -2,8 +2,7 @@ language: bash
 services: docker
 
 env:
-  - ANDROID_SDK=27 ANDROID_BUILD_TOOLS=27.0.3 LATEST=true
-  - ANDROID_SDK=27 ANDROID_BUILD_TOOLS=27.0.3 VARIANT=alpine
+  - ANDROID_SDK=28 ANDROID_BUILD_TOOLS=28.0.3 LATEST=true
 
 install:
   - git clone https://github.com/docker-library/official-images.git ~/official-images
