@@ -8,7 +8,7 @@ ENV ANDROID_COMPILE_SDK=$ANDROID_COMPILE_SDK
 ARG ANDROID_BUILD_TOOLS_VERSION=25.0.2
 ENV ANDROID_BUILD_TOOLS_VERSION=$ANDROID_BUILD_TOOLS_VERSION
 
-ENV ANDROID_SDK_FILENAME sdk-tools-linux-3859397.zip
+ENV ANDROID_SDK_FILENAME sdk-tools-linux-4333796.zip
 ENV ANDROID_SDK_URL https://dl.google.com/android/repository/${ANDROID_SDK_FILENAME}
 
 # Prepare Android SDK directory
@@ -23,18 +23,21 @@ RUN cd /opt && \
   rm -f android-sdk.zip && \
   chown -R root.root android-sdk-linux && \
 
+# Redirecting output to /dev/null to avoid travis build error due to build length
 # Accept licence
-  yes | /opt/android-sdk-linux/tools/bin/sdkmanager --licenses && \
+  yes | /opt/android-sdk-linux/tools/bin/sdkmanager --licenses > /dev/null && \
 
 # Download SDK dependencies
-  /opt/android-sdk-linux/tools/bin/sdkmanager \
+  yes | /opt/android-sdk-linux/tools/bin/sdkmanager \
     tools \
     platform-tools \
     "build-tools;${ANDROID_BUILD_TOOLS_VERSION}" \
     "platforms;android-${ANDROID_COMPILE_SDK}" \
     "extras;android;m2repository" \
     "extras;google;m2repository" \
-    "extras;google;google_play_services"
+    "extras;google;google_play_services" > /dev/null && \
+
+  yes | /opt/android-sdk-linux/tools/bin/sdkmanager --licenses
 
 # ----- END
 
